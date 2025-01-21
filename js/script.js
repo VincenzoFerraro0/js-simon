@@ -19,5 +19,18 @@ Consigli del giorno:
         -scriviamo le funzioni nel file function.js 
         -
 */
+const numberList = document.querySelector('#numbers-list')
+const divHtml = document.querySelector('#countdown')
+const numeri = generaNumeriCasuali(1, 50);
+
+numeri.forEach(numero => {
+    const li = document.createElement('li');
+    li.textContent = `${numero}`;
+    numberList.appendChild(li);
+});
+
+
+createCountdown(30, 1000, divHtml )
+
 
 
