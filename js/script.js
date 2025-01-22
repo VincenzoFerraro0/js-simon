@@ -14,23 +14,30 @@ Consigli del giorno:
 > - Individuate gli elementi di cui avete bisogno per realizzare il programma.
 > - Immaginate la logica come fosse uno snack: "Dati 2 array di numeri, indica quali e quanti numeri ci sono in comune tra i due array"
 
-
-    MINI TASK
-        -scriviamo le funzioni nel file function.js 
-        -
 */
-const numberList = document.querySelector('#numbers-list')
-const divHtml = document.querySelector('#countdown')
-const numeri = generaNumeriCasuali(1, 50);
 
-numeri.forEach(numero => {
+// Visualizziamo in pagina i 5 numeri random 
+const numberList = document.querySelector('#numbers-list')
+let numArray = [];
+function GeneraNumeriCasuali(min, max) {
+    return Math.floor(Math.random() * max) + min;
+}
+
+for (let i = 0; numArray.length < 5; i++) {
+    let numeroRandom = GeneraNumeriCasuali(1, 50) 
+
+    //controllo se il numero è già esistente nell'array
+    if (!(numArray.includes(numeroRandom ))){
+
+        //Inserisco il numero nell'array vuoto
+        numArray.push(numeroRandom)
+    }
+}
+console.log(numArray)
+
+// stampo i numeri generati nell'elemento con la variabile numberList = in html <ul>
+numArray.forEach(numero => {
     const li = document.createElement('li');
     li.textContent = `${numero}`;
     numberList.appendChild(li);
 });
-
-
-createCountdown(30, 1000, divHtml )
-
-
-
