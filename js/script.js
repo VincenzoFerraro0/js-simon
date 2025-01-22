@@ -41,3 +41,27 @@ numArray.forEach(numero => {
     li.textContent = `${numero}`;
     numberList.appendChild(li);
 });
+
+// Creo il timer che parte da 30 secondi e quando arriva a 0 fà scomparire i numeri creati precedentemente
+//Seleziono gli elementi in html
+const countdown = document.querySelector('#countdown')
+const instructions = document.querySelector('#instructions')
+const answersForm = document.querySelector('#answers-form')
+
+//parte da 30
+let counter = 3;
+
+//funzione che fa partire il ccountdown
+const timer = setInterval(() => {
+    countdown.innerHTML = counter--
+
+    // Se arriva diventa minore di 0
+    if (counter < 0 ) {
+        clearInterval(timer)
+        numberList.classList.add('d-none') //  aggiungo la classe per rimuovere i numeri generati 
+        instructions.classList.add('d-none') // aggiungo la classe per rimuovere le istruzioni 
+        answersForm.classList.remove('d-none') // rimuovo la classe per far apparire gli input 
+    }
+    
+}, 1000); //millisecondi = 1 sec
+
