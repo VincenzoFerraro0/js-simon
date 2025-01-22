@@ -18,25 +18,25 @@ Consigli del giorno:
 
 // Visualizziamo in pagina i 5 numeri random 
 const numberList = document.querySelector('#numbers-list')
-let numArray = [];
+let numeriGenerati = [];
 function GeneraNumeriCasuali(min, max) {
     return Math.floor(Math.random() * max) + min;
 }
 
-for (let i = 0; numArray.length < 5; i++) {
+for (let i = 0; numeriGenerati.length < 5; i++) {
     let numeroRandom = GeneraNumeriCasuali(1, 50) 
 
     //controllo se il numero è già esistente nell'array
-    if (!(numArray.includes(numeroRandom ))){
+    if (!(numeriGenerati.includes(numeroRandom ))){
 
         //Inserisco il numero nell'array vuoto
-        numArray.push(numeroRandom)
+        numeriGenerati.push(numeroRandom)
     }
 }
-console.log(numArray)
+console.log(numeriGenerati)
 
 // stampo i numeri generati nell'elemento con la variabile numberList = in html <ul>
-numArray.forEach(numero => {
+numeriGenerati.forEach(numero => {
     const li = document.createElement('li');
     li.textContent = `${numero}`;
     numberList.appendChild(li);
@@ -49,7 +49,7 @@ const instructions = document.querySelector('#instructions')
 const answersForm = document.querySelector('#answers-form')
 
 //parte da 30
-let counter = 3;
+let counter = 30;
 
 //funzione che fa partire il ccountdown
 const timer = setInterval(() => {
@@ -64,4 +64,54 @@ const timer = setInterval(() => {
     }
     
 }, 1000); //millisecondi = 1 sec
+
+// avvio del gioco (confronto dei numeri generati con quelli dell'utente)
+const bottone = document.querySelector('.btn-primary')
+const inputs = document.querySelectorAll('input')
+const numeriUtenteCorretti = [];
+const messaggio = document.querySelector('#message')
+
+console.log(inputs);
+
+bottone.addEventListener('click', function(event) {
+    event.preventDefault()
+
+    for (let i = 0; i < inputs.length; i++) {
+
+        //confronto dei numeri 
+        if (numeriGenerati.includes( parseInt(inputs[i].value) ) ) {
+            //Il punteggio aumenta
+            numeriUtenteCorretti.push(inputs[i].value)
+        }
+
+        console.log(numeriUtenteCorretti, inputs[i].value, numeriGenerati.includes(parseInt(inputs[i].value)));
+
+    }
+    // stampo il risultato
+    messaggio.innerHTML = `hai indovinato: ${numeriUtenteCorretti.length}, e sono: ${numeriUtenteCorretti.join(",")}`
+})
+
+// Modalità Dark
+const btnDark = document.querySelector('.btn-dark');
+const tagHtml = document.querySelector('html');
+
+btnDark.addEventListener('click', function() {
+    // Controlla il tema corrente
+    const temadefault = tagHtml.getAttribute('data-bs-theme');
+
+    // Alterna  'dark' e 'light'
+    if (temadefault === 'dark') {
+        tagHtml.setAttribute('data-bs-theme', 'light');
+    } else {
+        tagHtml.setAttribute('data-bs-theme', 'dark');
+    }
+});
+
+// Refresh pagina 
+const btnRefresh = document.querySelector('.btn-danger')
+
+btnRefresh.addEventListener('click', function() {
+    window.location.reload(true);
+})
+
 
